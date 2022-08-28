@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  backend:
+    container_name: blueprint_backend
+    build: backend
+    stdin_open: true
+    ports:
+      - 3000:3000
+    volumes:
+      - ./backend:/app
+
+  postgres:
+    container_name: blueprint_postgres
+    image: postgres:14-alpine
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=""
+      - POSTGRES_DB=dev
+
+volumes:
+  postgres:
