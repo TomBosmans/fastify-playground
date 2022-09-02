@@ -1,5 +1,5 @@
 import { User } from "@prisma/client"
-import prisma, { Transaction } from "../../app/prisma"
+import prismaClient, { Transaction } from "../../app/prisma"
 
 type Data = {
   id: User["id"]
@@ -7,6 +7,6 @@ type Data = {
   firstName?: User["firstName"]
   lastName?: User["lastName"]
 }
-export async function updateUser({ id, ...data }: Data, db: Transaction = prisma): Promise<User> {
-  return await db.user.update({ where: { id }, data })
+export async function updateUser({ id, ...data }: Data, prisma: Transaction = prismaClient): Promise<User> {
+  return await prisma.user.update({ where: { id }, data })
 }

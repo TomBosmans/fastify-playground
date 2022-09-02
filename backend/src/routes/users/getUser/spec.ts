@@ -7,7 +7,7 @@ describe("GET /users/:id", () => {
     const app = await buildApp()
 
     const data = userSchema.parse({ id: randUuid() })
-    const { id } = await app.db.user.create({ data })
+    const { id } = await app.prisma.user.create({ data })
 
     const response = await app.inject({
       method: "GET",

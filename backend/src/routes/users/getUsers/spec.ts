@@ -5,7 +5,7 @@ import { userSchema } from "../../../models/user.schema"
 describe("GET /users", () => {
   it("responds 200", async () => {
     const app = await buildApp()
-    await app.db.user.create({ data: userSchema.parse({}) })
+    await app.prisma.user.create({ data: userSchema.parse({}) })
 
     const response = await app.inject({
       method: "GET",

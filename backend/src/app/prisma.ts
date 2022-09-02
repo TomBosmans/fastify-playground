@@ -4,17 +4,17 @@ import { PrismaClient } from "@prisma/client"
 
 declare module "fastify" {
   interface FastifyInstance {
-    db: PrismaClient
+    prisma: PrismaClient
   }
 }
 
-const prisma = new PrismaClient()
+const prismaClient = new PrismaClient()
 
 const prismaPlugin: FastifyPluginAsync = fp(async (app) => {
-  await prisma.$connect()
+  await prismaClient.$connect()
 
-  app.decorate("db", prisma)
-  app.addHook("onClose", async (app) => await app.db.$disconnect())
+  app.decorate("prisma", prismaClient)
+  app.addHook("onClose", async (app) => await app.prisma.$disconnect())
 })
 
 export async function registerPrisma(app: FastifyInstance) {
@@ -22,4 +22,4 @@ export async function registerPrisma(app: FastifyInstance) {
 }
 
 export type Transaction = Omit<PrismaClient, "$connect" | "$disconnect" | "$on" | "$transaction" | "$use">
-export default prisma
+export default prismaClient

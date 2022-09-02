@@ -6,7 +6,7 @@ describe("PATCH /user/:id", () => {
   it("responds 200", async () => {
     const app = await buildApp()
 
-    const { id } = await app.db.user.create({ data: userSchema.parse({}) })
+    const { id } = await app.prisma.user.create({ data: userSchema.parse({}) })
     const response = await app.inject({
       method: "PATCH",
       url: `/users/${id}`,
