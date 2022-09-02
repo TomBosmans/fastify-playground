@@ -1,4 +1,4 @@
-import { buildApp } from "../../../app/buildApp"
+import { buildApp } from "../../../app"
 import { userSchema } from "../../../models/user.schema"
 
 describe("POST /users", () => {
@@ -8,7 +8,7 @@ describe("POST /users", () => {
     const response = await app.inject({
       method: "POST",
       url: "/users",
-      payload
+      payload,
     })
 
     expect(response.statusCode).toEqual(201)
@@ -20,7 +20,7 @@ describe("POST /users", () => {
     const response = await app.inject({
       method: "POST",
       url: "/users",
-      payload: { ...payload, firstName: 123 }
+      payload: { ...payload, firstName: 123 },
     })
 
     expect(response.statusCode).toEqual(400)

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "@jest/globals"
-import { buildApp } from "../../../app/buildApp"
+import { buildApp } from "../../../app"
 import { userSchema } from "../../../models/user.schema"
 
 describe("GET /users", () => {

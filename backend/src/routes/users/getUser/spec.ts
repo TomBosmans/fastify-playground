@@ -1,5 +1,5 @@
 import { randUuid } from "@ngneat/falso"
-import { buildApp } from "../../../app/buildApp"
+import { buildApp } from "../../../app"
 import { userSchema } from "../../../models/user.schema"
 
 describe("GET /users/:id", () => {

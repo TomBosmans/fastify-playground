@@ -1,5 +1,5 @@
 import { randUuid } from "@ngneat/falso"
-import { buildApp } from "../../../app/buildApp"
+import { buildApp } from "../../../app"
 import { userSchema } from "../../../models/user.schema"
 
 describe("PATCH /user/:id", () => {
@@ -10,7 +10,7 @@ describe("PATCH /user/:id", () => {
     const response = await app.inject({
       method: "PATCH",
       url: `/users/${id}`,
-      payload: { firstName: "Tom" }
+      payload: { firstName: "Tom" },
     })
 
     expect(response.statusCode).toEqual(200)
@@ -22,7 +22,7 @@ describe("PATCH /user/:id", () => {
     const response = await app.inject({
       method: "PATCH",
       url: "/users/123",
-      payload: { firstName: "Tom" }
+      payload: { firstName: "Tom" },
     })
 
     expect(response.statusCode).toEqual(400)
@@ -34,12 +34,11 @@ describe("PATCH /user/:id", () => {
     const response = await app.inject({
       method: "PATCH",
       url: "/users/123",
-      payload: { firstName: 123 }
+      payload: { firstName: 123 },
     })
 
     expect(response.statusCode).toEqual(400)
   })
-
 
   it("responds 404 when record not found", async () => {
     const app = await buildApp()
@@ -47,7 +46,7 @@ describe("PATCH /user/:id", () => {
     const response = await app.inject({
       method: "PATCH",
       url: `/users/${randUuid()}`,
-      payload: { firstName: "Tom" }
+      payload: { firstName: "Tom" },
     })
 
     expect(response.statusCode).toEqual(404)
