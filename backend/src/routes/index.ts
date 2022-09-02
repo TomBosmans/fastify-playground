@@ -1,8 +1,8 @@
 import { FastifyInstance } from "fastify"
-import { defaultRoutes } from "./default"
+import { healthRoutes } from "./health"
 import { usersRoutes } from "./users"
 
 export async function registerRoutes(app: FastifyInstance) {
-  await app.register(defaultRoutes)
+  await app.register(healthRoutes, { prefix: "health" })
   await app.register(usersRoutes, { prefix: "users" })
 }

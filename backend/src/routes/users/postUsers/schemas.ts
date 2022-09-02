@@ -11,8 +11,8 @@ export const responseSchema = z.object({
   email: z.string().email(),
   firstName: z.string(),
   lastName: z.string(),
-  createdAt: z.string().default(new Date().toISOString()),
-  updatedAt: z.string().default(new Date().toISOString()),
+  createdAt: z.string(),
+  updatedAt: z.string(),
 })
 
-export type BodyParams = z.infer<typeof bodySchema>
+export type BodyParams = z.output<typeof bodySchema>

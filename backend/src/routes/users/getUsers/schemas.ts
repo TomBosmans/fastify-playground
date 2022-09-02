@@ -6,8 +6,8 @@ export const responseSchema = z
     email: z.string().email(),
     firstName: z.string(),
     lastName: z.string(),
-    createdAt: z.date(),
-    updatedAt: z.date(),
+    createdAt: z.string(),
+    updatedAt: z.string(),
   })
   .array()
 
@@ -16,5 +16,5 @@ export const querySchema = z.object({
   firstName: z.string().optional()
 })
 
-export type QueryParams = z.infer<typeof querySchema>
-export type Response = z.infer<typeof responseSchema>
+export type QueryParams = z.output<typeof querySchema>
+export type Response = z.output<typeof responseSchema>

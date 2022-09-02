@@ -4,12 +4,13 @@ import { ZodAny } from "zod"
 export const zodSerializerCompiler: FastifySerializerCompiler<ZodAny> = ({ schema }) => {
   return (data) => {
     try {
-      const result = schema.safeParse(data)
+      const json = JSON.stringify(data)
+      const result = schema.safeParse(JSON.parse(json))
       if (result.success) return JSON.stringify(result.data)
     } catch (_error) {
       // when #querystring is not present the zod object gets nested under properties.
       const otherSchema = schema as unknown as { properties: ZodAny }
-      const result = otherSchema.properties.safeParse(data)
+      const result = otherSchema.properties.safeParse(JSON.parse(JSON.stringify(data)))
       if (result.success) return JSON.stringify(result.data)
     }
 

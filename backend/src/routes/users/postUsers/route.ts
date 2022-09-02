@@ -14,7 +14,8 @@ export function postUserRoute(app: FastifyInstance) {
         },
       },
     },
-    async (request: FastifyRequest<{ Body: BodyParams }>) => {
+    async (request: FastifyRequest<{ Body: BodyParams }>, reply) => {
+      reply.code(201)
       const data = request.body
       return await createUser(data)
     },

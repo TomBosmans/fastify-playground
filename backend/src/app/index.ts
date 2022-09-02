@@ -1,16 +1,14 @@
-import Fastify from 'fastify'
-import { registerSwagger } from "./swagger"
-import { registerRoutes } from '../routes'
-import { registerPrisma } from './prisma'
-import { registerZod } from './zod'
+import { buildApp } from "./buildApp"
 
 export async function setupApp() {
-  const app = Fastify({ logger: true })
-
-  await registerZod(app)
-  await registerSwagger(app)
-  await registerRoutes(app)
-  await registerPrisma(app)
+  const app = await buildApp({
+    logger: {
+      level: "info",
+      transport: {
+        target: "pino-pretty",
+      },
+    },
+  })
 
   try {
     const port = Number(process.env.PORT)
