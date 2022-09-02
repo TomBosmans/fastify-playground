@@ -6,6 +6,9 @@ export async function setupApp() {
       level: "info",
       transport: {
         target: "pino-pretty",
+        options: {
+          colorize: true,
+        },
       },
     },
   })
