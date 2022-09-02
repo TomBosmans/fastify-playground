@@ -10,8 +10,8 @@ export async function registerSwagger(app: FastifyInstance) {
     staticCSP: true,
     swagger: {
       info: {
-        title: "The Title",
-        description: "My Description",
+        title: app.env.SWAGGER_TITLE,
+        description: app.env.SWAGGER_DESCRIPTION,
         version,
       },
     },
