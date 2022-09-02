@@ -1,10 +1,10 @@
 import { buildApp } from "../../../app"
-import { userSchema } from "../../../models/user.schema"
+import { randBuildUser } from "../../../factories/user.factory"
 
 describe("POST /users", () => {
   it("responds 201", async () => {
     const app = await buildApp()
-    const payload = userSchema.parse({})
+    const payload = randBuildUser()
     const response = await app.inject({
       method: "POST",
       url: "/users",
@@ -16,7 +16,7 @@ describe("POST /users", () => {
 
   it("responds 400 with invalid payload", async () => {
     const app = await buildApp()
-    const payload = userSchema.parse({})
+    const payload = randBuildUser()
     const response = await app.inject({
       method: "POST",
       url: "/users",

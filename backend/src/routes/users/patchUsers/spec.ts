@@ -1,12 +1,12 @@
 import { randUuid } from "@ngneat/falso"
 import { buildApp } from "../../../app"
-import { userSchema } from "../../../models/user.schema"
+import { randCreateUser } from "../../../factories/user.factory"
 
 describe("PATCH /user/:id", () => {
   it("responds 200", async () => {
     const app = await buildApp()
 
-    const { id } = await app.prisma.user.create({ data: userSchema.parse({}) })
+    const { id } = await randCreateUser()
     const response = await app.inject({
       method: "PATCH",
       url: `/users/${id}`,

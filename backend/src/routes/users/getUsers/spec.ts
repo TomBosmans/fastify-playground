@@ -1,11 +1,11 @@
 import { describe, expect, it } from "@jest/globals"
 import { buildApp } from "../../../app"
-import { userSchema } from "../../../models/user.schema"
+import { randCreateUser } from "../../../factories/user.factory"
 
 describe("GET /users", () => {
   it("responds 200", async () => {
     const app = await buildApp()
-    await app.prisma.user.create({ data: userSchema.parse({}) })
+    await randCreateUser()
 
     const response = await app.inject({
       method: "GET",
