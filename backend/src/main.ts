@@ -1,3 +1,4 @@
+import { asClass, asValue, InjectionMode } from "awilix"
 import { buildApp } from "./app"
 
 export async function setupApp() {
@@ -10,6 +11,16 @@ export async function setupApp() {
           colorize: true,
         },
       },
+    },
+  })
+
+  app.container.register("prisma", asValue(app.prisma))
+  app.container.loadModules(["src/services/**/*.ts", "src/routes/**/handler.ts"], {
+    formatName: "camelCase",
+
+    resolverOptions: {
+      injectionMode: InjectionMode.CLASSIC,
+      register: asClass,
     },
   })
 

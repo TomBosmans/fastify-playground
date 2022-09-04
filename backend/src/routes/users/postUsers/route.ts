@@ -1,5 +1,4 @@
 import { FastifyInstance, FastifyRequest } from "fastify"
-import { createUser } from "../../../services/users/createUser.service"
 import { BodyParams, bodySchema, responseSchema } from "./schemas"
 
 export function postUserRoute(app: FastifyInstance) {
@@ -17,7 +16,9 @@ export function postUserRoute(app: FastifyInstance) {
     async (request: FastifyRequest<{ Body: BodyParams }>, reply) => {
       reply.code(201)
       const data = request.body
-      return await createUser(data)
+      console.log(app.container)
+      const createUserService = app.container.resolve("createUserService")
+      return await createUserService.execute(data)
     },
   )
 }

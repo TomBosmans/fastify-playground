@@ -1,5 +1,4 @@
 import { FastifyInstance } from "fastify"
-import { findManyUsers } from "../../../services/users/findManyUsers.service"
 import { querySchema, responseSchema } from "./schemas"
 
 export function getUsersRoute(app: FastifyInstance) {
@@ -15,8 +14,8 @@ export function getUsersRoute(app: FastifyInstance) {
       },
     },
     async () => {
-      const users = await findManyUsers()
-      return users
+      const findManyUsersService = app.container.resolve("findManyUsersService")
+      return await findManyUsersService.execute()
     },
   )
 }

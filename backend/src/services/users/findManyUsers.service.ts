@@ -1,5 +1,11 @@
-import prismaClient, { Transaction } from "../../app/prisma";
+import { PrismaClient } from "@prisma/client"
+import { Transaction } from "../../app/prisma"
 
-export async function findManyUsers(prisma: Transaction = prismaClient) {
-  return await prisma.user.findMany()
+export default class FindManyUsersService {
+  constructor(private prisma: PrismaClient) {}
+
+  public async execute(prisma: Transaction = this.prisma) {
+    console.log(this.prisma)
+    return await prisma.user.findMany()
+  }
 }

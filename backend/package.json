@@ -4,6 +4,7 @@
     "@fastify/swagger": "^7.4.1",
     "@ngneat/falso": "^6.1.0",
     "@prisma/client": "^4.2.1",
+    "awilix": "^7.0.3",
     "dotenv": "^16.0.1",
     "fastify": "^4.5.3",
     "pino-pretty": "^9.1.0",
@@ -35,6 +36,7 @@
     "db:reset:dev": "dotenv -e .env.development -- prisma migrate reset",
     "db:reset:test": "dotenv -e .env.test -- prisma migrate reset",
     "db:generate": "prisma generate",
-    "test": "dotenv -e .env.test -- jest"
+    "test": "dotenv -e .env.test -- jest",
+    "ts-node": "ts-node"
   }
 }

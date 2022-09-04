@@ -1,5 +1,4 @@
 import { FastifyInstance, FastifyRequest } from "fastify"
-import { findOneUser } from "../../../services/users/findOneUser.service"
 import { Params, paramsSchema, responseSchema } from "./schemas"
 
 export function getUserRoute(app: FastifyInstance) {
@@ -16,7 +15,8 @@ export function getUserRoute(app: FastifyInstance) {
     },
     async (request: FastifyRequest<{ Params: Params }>) => {
       const { id } = request.params
-      return await findOneUser({ id })
+      const findOneUserService = app.container.resolve("findOneUserService")
+      return await findOneUserService.execute({ id })
     },
   )
 }
